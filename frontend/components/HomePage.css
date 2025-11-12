@@ -1,0 +1,259 @@
+/* --- 1. ADDED: CSS Variables for Theming --- */
+:root {
+  --primary-blue: #007bff;
+  --accent-color: #00bcd4; /* This is your teal */
+  --bg-light: #ffffff;
+  --bg-dark: #121212; /* Match other dark pages */
+  --card-light: #ffffff;
+  --card-dark: #1e1e1e;
+  --text-light-primary: #1a2a40;
+  --text-light-secondary: #555;
+  --text-dark-primary: #f0f4f8;
+  --text-dark-secondary: #a0aec0;
+  --border-light: #eee;
+  --border-dark: #303030;
+  --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.05);
+  --shadow-dark: 0 4px 15px rgba(0, 0, 0, 0.2);
+  --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--primary-blue));
+}
+
+/* --- 2. ADDED: New Fade-Up Animation --- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Original Animations (Unchanged) --- */
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: var(--accent-color); } }
+@keyframes float-animation { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* --- 3. UPDATED: Base Page Styles (Using Variables) --- */
+.home-page {
+  width: 100%;
+  /* REMOVED: height: 100%; */
+  min-height: 100vh; /* 1. Use min-height to allow page to grow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* 2. Align content from the top */
+  background-color: var(--bg-light);
+  color: var(--text-light-primary);
+  padding: 1rem 1rem 1rem 1rem; /* 3. Add top/bottom padding for spacing */
+  /* REMOVED: overflow: hidden; */ /* 4. Allow scrolling if content is long */
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  transition: background-color 0.4s, color 0.4s;
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1100px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.hero-text {
+  flex: 1;
+  text-align: left;
+}
+
+.hero-text h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-light-primary);
+  /* Typing animation */
+  overflow: hidden;
+  border-right: .1em solid var(--accent-color);
+  white-space: nowrap;
+  animation: typing 2s steps(30, end), blink-caret .75s step-end infinite;
+  animation-fill-mode: forwards;
+}
+
+/* --- 4. UPDATED: Gradient Text for H1 Span --- */
+.hero-text h1 span {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-text p {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--text-light-secondary);
+  margin-bottom: 1.5rem;
+
+  /* 5. ADDED: Animation for hero text */
+  opacity: 0; /* Start hidden */
+  animation: fadeUp 0.6s ease-out 2.1s forwards; /* Start after typing */
+}
+
+/* --- 6. UPDATED: Gradient CTA Button --- */
+.hero-cta {
+  padding: 0.8rem 2rem;
+  background: var(--gradient-accent); /* Use gradient */
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+  transition: all 0.3s ease;
+
+  /* 7. ADDED: Animation for CTA */
+  opacity: 0; /* Start hidden */
+  animation: fadeUp 0.6s ease-out 2.3s forwards; /* Start after paragraph */
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 188, 212, 0.4);
+}
+
+.hero-image {
+  flex: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float-animation 6s ease-in-out infinite;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  
+  /* 8. ADDED: Staggered animation for cards */
+  opacity: 0;
+  animation: fadeUp 0.6s ease-out forwards;
+}
+.card-link:nth-child(1) { animation-delay: 2.5s; }
+.card-link:nth-child(2) { animation-delay: 2.7s; }
+.card-link:nth-child(3) { animation-delay: 2.9s; }
+
+
+.card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  text-align: left;
+  background-color: var(--card-light);
+}
+
+.card-link:hover .card {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
+}
+
+.card .icon {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: var(--text-light-secondary);
+}
+
+/* --- 9. ADDED: Dark Mode Styles --- */
+.home-page.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark-primary);
+}
+.home-page.dark .hero-text h1 {
+  color: var(--text-dark-primary);
+  border-right-color: var(--accent-color);
+}
+.home-page.dark .hero-text p {
+  color: var(--text-dark-secondary);
+}
+.home-page.dark .card {
+  background-color: var(--card-dark);
+  border-color: var(--border-dark);
+  box-shadow: var(--shadow-dark);
+}
+.home-page.dark .card-link:hover .card {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent-color);
+}
+.home-page.dark .card h3 {
+  color: var(--text-dark-primary);
+}
+.home-page.dark .card p {
+  color: var(--text-dark-secondary);
+}
+/* Keep float animation's visual, but adjust graphic for dark mode */
+.home-page.dark .hero-image img {
+  filter: brightness(0.9) saturate(1.1);
+}
+
+
+/* --- 10. UPDATED: Mobile Animations --- */
+@media (max-width: 992px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-text { text-align: center; }
+  
+  /* Replace typing with fadeUp on mobile */
+  .hero-text h1 {
+    animation: fadeUp 0.6s ease-out 0.2s forwards;
+    border-right: none;
+    white-space: normal;
+  }
+  .hero-text p {
+    animation-delay: 0.4s; /* Faster delay for mobile */
+  }
+  .hero-cta {
+    animation-delay: 0.6s; /* Faster delay for mobile */
+  }
+  
+  /* Reset card delays for mobile */
+  .card-link:nth-child(1) { animation-delay: 0.8s; }
+  .card-link:nth-child(2) { animation-delay: 1.0s; }
+  .card-link:nth-child(3) { animation-delay: 1.2s; }
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    overflow-y: auto;
+    justify-content: flex-start;
+    padding: 3rem 1rem 1rem 1rem;
+  }
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}

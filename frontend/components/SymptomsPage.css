@@ -1,0 +1,416 @@
+/* --- Variables --- */
+:root {
+    --accent-color: #00bcd4;
+    --accent-dark: #0097a7;
+    --primary-blue: #007bff;
+    --bg-light: #f0f4f8;
+    --text-light: #2c3e50;
+    --bg-dark: #1a1a2e;
+    --text-dark: #e0e0e0;
+    --card-light: rgba(255, 255, 255, 0.65);
+    --card-dark: rgba(40, 40, 60, 0.65);
+    --border-light: rgba(200, 200, 220, 0.4);
+    --border-dark: rgba(80, 80, 100, 0.4);
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --gradient-accent: linear-gradient(135deg, #00bcd4, #007bff);
+}
+
+/* --- Base Page --- */
+.symptoms-page {
+    padding: 60px 5%;
+    background: var(--bg-light);
+    color: var(--text-light);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.4s, color 0.4s;
+    display: flex;
+    flex-direction: column;
+}
+.symptoms-page.dark {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+/* --- Header (Centered) --- */
+.page-header {
+    text-align: center; /* This centers all the content */
+    margin-bottom: 50px;
+    width: 100%;
+    max-width: 800px; /* Constrain width */
+    margin-left: auto; /* Center the block */
+    margin-right: auto; /* Center the block */
+}
+.header-icon {
+    color: var(--primary-blue);
+    margin-bottom: 10px; /* Adds space below the icon */
+}
+/* This wrapper is no longer needed for layout, but is harmless */
+.header-text-symptoms {
+    /* No special styles needed */
+}
+.symptoms-page h1 {
+    font-size: 2.5em;
+    font-weight: 800;
+    margin-bottom: 8px; /* Give it a bit more margin */
+    margin-top: 0;
+    color: var(--text-light);
+}
+.symptoms-page.dark h1 {
+    color: var(--text-dark);
+}
+.subtitle {
+    font-size: 1.1em;
+    color: #6c757d;
+    margin: 0;
+}
+.symptoms-page.dark .subtitle {
+    color: var(--text-secondary);
+}
+
+/* --- Form, Error, Report Card (Centered Content) --- */
+.symptoms-page form {
+    background: var(--card-light);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-light);
+    transition: background-color 0.4s, border-color 0.4s, box-shadow 0.4s;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+}
+.symptoms-page.dark form {
+    background: var(--card-dark);
+    border-color: var(--border-dark);
+    box-shadow: var(--shadow-dark);
+}
+
+.error-message {
+    color: var(--danger-color);
+    background: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid var(--danger-color);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.symptoms-page .report-card {
+    padding: 30px;
+    border-radius: 16px;
+    background: var(--card-light);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-light);
+    transition: all 0.4s ease;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.symptoms-page.dark .report-card {
+    background: var(--card-dark);
+    border-color: var(--border-dark);
+    box-shadow: var(--shadow-dark);
+}
+
+/* --- Form Elements --- */
+.symptoms-page label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--text-light);
+}
+.symptoms-page.dark label {
+    color: var(--text-dark);
+}
+
+/* Hide old textarea */
+.symptoms-page textarea {
+    display: none;
+}
+
+/* --- NEW Tag Input Styles --- */
+.symptoms-page input[type="text"] {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--text-light);
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.symptoms-page.dark input[type="text"] {
+    background: rgba(50, 50, 70, 0.5);
+    border-color: var(--border-dark);
+    color: var(--text-dark);
+}
+
+.symptoms-page input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.2);
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary-blue);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+    
+    /* --- ADD THESE LINES --- */
+    border: none; 
+    cursor: pointer;
+    font-family: inherit; /* Make sure it uses the page font */
+    transition: all 0.2s ease-out; /* Add transition for hover */
+}
+.tag-pill:hover {
+    background: var(--danger-color); /* Change to red on hover */
+    transform: translateY(-1px); /* Add a slight lift */
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+
+.symptoms-page.dark .tag-pill {
+    background: var(--accent-dark);
+}
+
+.tag-remove-btn {
+    background: rgba(255, 255, 255, 0.2); /* Light background */
+    border: none;
+    border-radius: 50%;
+    width: 20px; /* Made slightly larger to fit */
+    height: 20px; /* Made slightly larger to fit */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s;
+}
+
+/* --- THIS IS THE FIX --- */
+/* Target the SVG icon directly */
+.tag-remove-btn svg {
+    /* Set the icon's line color to be blue */
+    stroke: var(--primary-blue);
+}
+
+/* Set the icon color for Dark Mode */
+.symptoms-page.dark .tag-remove-btn svg {
+    /* Set the icon's line color to be dark teal */
+    stroke: var(--accent-dark);
+}
+.tag-remove-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Buttons */
+.symptoms-page .button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+.symptoms-page button {
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.symptoms-page button[type="submit"] {
+    background: var(--gradient-accent);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 150, 167, 0.3);
+}
+.symptoms-page button[type="submit"]:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 150, 167, 0.4);
+}
+
+.symptoms-page .clear-btn {
+    background: transparent;
+    color: #6c757d;
+    border: 1px solid var(--border-light);
+}
+.symptoms-page.dark .clear-btn {
+    border-color: var(--border-dark);
+    color: var(--text-secondary);
+}
+.symptoms-page .clear-btn:hover:not(:disabled) {
+    background: rgba(108, 117, 125, 0.1);
+}
+
+.symptoms-page button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- Report Card Content --- */
+.report-card h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: -5px 0 25px 0;
+    color: var(--primary-blue);
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-light);
+}
+.symptoms-page.dark .report-card h2 {
+    border-bottom-color: var(--border-dark);
+}
+
+.report-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--border-light);
+}
+.report-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.symptoms-page.dark .report-section {
+    border-color: var(--border-dark);
+}
+
+.report-section strong {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.symptoms-page.dark .report-section strong {
+    color: var(--text-secondary);
+}
+
+.report-section p,
+.report-section ul {
+    margin: 0;
+    padding: 0;
+}
+.report-section p {
+    font-size: 1.1em;
+}
+.report-section ul {
+    list-style-position: inside;
+    padding-left: 5px;
+}
+.report-section li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.disease-name {
+    font-weight: 700;
+    font-size: 1.3em !important;
+    color: var(--primary-blue);
+}
+.symptoms-page.dark .disease-name {
+    color: var(--primary-teal);
+}
+
+.symptom-list {
+    color: #555;
+    font-style: italic;
+}
+.symptoms-page.dark .symptom-list {
+    color: #bbb;
+}
+
+.risk-level-display {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left-width: 4px;
+    border-left-style: solid;
+}
+.risk-level-display p {
+    font-weight: 600;
+}
+.risk-high {
+    border-left-color: var(--danger-color);
+    background: rgba(231, 76, 60, 0.05);
+}
+.risk-moderate {
+    border-left-color: var(--warning-color);
+    background: rgba(243, 156, 18, 0.05);
+}
+.risk-low {
+    border-left-color: var(--success-color);
+    background: rgba(46, 204, 113, 0.05);
+}
+
+/* --- Animations --- */
+.spin {
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.fade-in-item {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,383 @@
+/* src/components/AboutPage.css */
+
+/* --- 1. THEME & FONT DEFINITIONS --- */
+:root {
+  --font-primary: 'Inter', 'Segoe UI', sans-serif;
+
+  /* Light Theme */
+  --bg-color: #f8fafc;
+  --bg-accent: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --color-primary: #0ea5e9;
+  --color-primary-light: #f0f9ff;
+  --border-color: #e2e8f0;
+  --card-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --glow-color: rgba(14, 165, 233, 0.3);
+}
+
+.dark {
+  /* Dark Theme */
+  --bg-color: #0f172a;
+  --bg-accent: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --color-primary: #38bdf8;
+  --color-primary-light: rgba(56, 189, 248, 0.1);
+  --border-color: #334155;
+  --card-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.3);
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --glow-color: rgba(56, 189, 248, 0.2);
+}
+
+/* --- 2. BASE & PAGE STYLES --- */
+.about-page {
+  font-family: var(--font-primary);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
+  position: relative;
+  padding-bottom: 4rem; /* Add padding at the bottom */
+}
+.background-blob {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background-image: radial-gradient(circle, var(--color-primary-light) 0%, rgba(255,255,255,0) 60%);
+  z-index: 0;
+  opacity: 0.5;
+}
+.dark .background-blob {
+  background-image: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, rgba(15, 23, 42, 0) 60%);
+}
+
+/* --- 3. GENERAL SECTION & ITEM ANIMATION --- */
+.about-section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.about-section-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+              transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.about-section-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- 4. HERO SECTION --- */
+.about-hero {
+  text-align: center;
+  padding-bottom: 7rem;
+}
+.hero-tagline {
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 0.5rem 1.25rem;
+  border-radius: 99px;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+.about-hero h1 {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 800;
+  max-width: 850px;
+  margin: 0 auto 1.5rem auto;
+  line-height: 1.15;
+}
+.about-hero p {
+  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+  max-width: 700px;
+  margin: 0 auto 2.5rem auto;
+  color: var(--text-secondary);
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-primary);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px -5px rgba(14, 165, 233, 0.4);
+}
+.hero-cta svg { transition: transform 0.3s ease; }
+.hero-cta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -5px rgba(14, 165, 233, 0.6);
+}
+.hero-cta:hover svg { transform: translateX(4px); }
+
+/* --- 5. TIMELINE SECTION --- */
+.timeline-wrapper {
+  max-width: 900px; /* Constrain width */
+}
+.timeline-heading {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  margin-bottom: 4rem;
+  color: var(--text-primary); /* Heading color */
+}
+.dark .timeline-heading { color: var(--text-primary);}
+
+.timeline-container {
+  position: relative;
+  padding: 2rem 0;
+}
+
+/* The central line */
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background-color: var(--border-color);
+  border-radius: 2px;
+}
+.dark .timeline-container::before {
+    background-color: var(--border-color);
+}
+
+/* Wrapper for each item to handle alignment and animation */
+.timeline-item-wrapper {
+  position: relative;
+  width: 50%;
+  padding: 0 40px; /* Space from the center line */
+  margin-bottom: 40px;
+}
+
+/* Align left/right items */
+.timeline-item-wrapper.left {
+  left: 0;
+  padding-right: 60px; /* More space for the circle */
+  text-align: right;
+}
+.timeline-item-wrapper.right {
+  left: 50%;
+  padding-left: 60px; /* More space for the circle */
+  text-align: left;
+}
+
+/* The circle on the timeline */
+.timeline-item-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 10px; /* Adjust vertical position */
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-primary);
+  border: 3px solid var(--bg-accent);
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 0 0 4px var(--color-primary-light);
+}
+.dark .timeline-item-wrapper::after {
+    border-color: var(--bg-accent);
+    box-shadow: 0 0 0 4px var(--color-primary-light);
+}
+.timeline-item-wrapper.left::after {
+  right: -8px; /* Position circle on the line */
+  transform: translateX(50%);
+}
+.timeline-item-wrapper.right::after {
+  left: -8px; /* Position circle on the line */
+  transform: translateX(-50%);
+}
+
+/* Content box for each item */
+.timeline-item {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px 25px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  position: relative;
+}
+.dark .timeline-item {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    box-shadow: var(--card-shadow);
+}
+
+.timeline-icon-container {
+  position: absolute;
+  top: 15px; /* Position icon near the top */
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Ensure icon itself inside container uses primary color */
+.timeline-icon-container .timeline-icon {
+    color: var(--color-primary);
+}
+.timeline-item-wrapper.left .timeline-icon-container {
+  right: -20px; /* Position icon outside the box, near the circle */
+  transform: translateX(100%);
+}
+.timeline-item-wrapper.right .timeline-icon-container {
+  left: -20px; /* Position icon outside the box, near the circle */
+  transform: translateX(-100%);
+}
+
+.timeline-date {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+.timeline-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.dark .timeline-content h3 { color: var(--text-primary); }
+.timeline-content p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.dark .timeline-content p { color: var(--text-secondary); }
+
+/* Responsive Timeline */
+@media (max-width: 768px) {
+  .timeline-container::before {
+    left: 8px; /* Move line to the left */
+    transform: translateX(0);
+  }
+  .timeline-item-wrapper {
+    width: 100%;
+    padding: 0; /* Reset padding */
+    margin-bottom: 30px;
+    left: 0 !important; /* Force all items left */
+    text-align: left !important; /* Force all text left */
+  }
+  .timeline-item-wrapper.left,
+  .timeline-item-wrapper.right {
+    padding-left: 50px; /* Space for line and circle */
+  }
+  .timeline-item-wrapper::after {
+    left: 8px; /* Align circle with the line */
+    transform: translateX(-50%);
+  }
+  .timeline-icon-container {
+      /* Adjust icon position for mobile */
+      left: 35px !important;
+      transform: translateX(-50%) !important;
+      top: 5px; /* Align better with the circle */
+  }
+}
+
+
+/* --- 6. TEAM SECTION --- */
+.team-section { text-align: center; }
+.team-section h2 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 700; }
+.team-intro { max-width: 650px; margin: 1rem auto 4rem auto; font-size: 1.1rem; color: var(--text-secondary); }
+.team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; }
+
+.team-member-card-wrapper { /* Animation wrapper */ }
+
+.team-member-card {
+  width: 250px;
+  text-align: center;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--card-shadow);
+  position: relative;
+}
+.team-member-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px var(--glow-color), var(--card-shadow);
+}
+
+/* Styles for Icon Circle */
+.team-member-icon-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white; /* Icon color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem; /* Controls icon size */
+  margin: -65px auto 1.5rem auto;
+  position: relative;
+  z-index: 2;
+  border: 4px solid var(--bg-accent);
+  box-shadow: 0 5px 15px rgba(14, 165, 233, 0.3);
+}
+/* Ensure the SVG itself fills the container nicely if needed */
+.team-member-icon-circle svg {
+    width: 50%; /* Adjust size as needed */
+    height: 50%; /* Adjust size as needed */
+}
+
+.dark .team-member-icon-circle {
+    border-color: var(--bg-accent);
+}
+
+.team-member-card h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+.team-member-card .role {
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* --- 7. Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 4rem 1rem; /* Adjust padding for mobile */
+    }
+    .team-grid {
+        gap: 2.5rem; /* Increased gap slightly for stacked cards */
+    }
+    .team-member-card {
+        width: 100%; /* Make team cards full width */
+        max-width: 300px; /* Optional max width */
+    }
+    /* Adjust icon circle size on mobile if needed */
+    .team-member-icon-circle {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+        margin-top: -55px; /* Adjust overlap */
+    }
+}
